@@ -11,23 +11,24 @@ while True:
 
     # Asking user what they want to do with the monster cards
     options = easygui.buttonbox("Enter what you would like to do with the Monster Cards: \n",
-                                "Home Screen", choices=["Add", "Search", "Delete", "Print", "Exit"])
+                                "Home Screen",
+                                choices=["Add", "Search", "Delete", "Print", "Exit"])
 
     # If user want to add a card
     if options == "Add":
-        print("User wants to add a card")
+        print("add() function is called on")
 
     # If user wants to search for cards
     elif options == "Search":
-        print("User wants to search all cards")
+        print("search() function is called on")
 
     # If user wants to delete a card
     elif options == "Delete":
-        print("User wants to delete a card")
+        print("delete() function is called on")
 
     # If user want to print all cards
     elif options == "Print":
-        print("User wants all cards printed ")
+        print("print() function is called on")
 
     # If user want to leave code
     elif options == "Exit":
