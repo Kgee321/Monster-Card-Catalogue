@@ -30,7 +30,7 @@ while True:
     elif options == "delete":
         print("User wants to delete a card")
 
-    # If user want to print combos
+    # If user want to print all cards
     elif options == "print":
         print("User wants all cards printed")
 
