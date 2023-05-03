@@ -51,8 +51,8 @@ def char_boundary(lower, upper, question_message, box):
 
 # Function for adding a new Monster Card
 def add():
-    # Variable setting
 
+    # Variable setting
     attributes = ["Strength", "Speed", "Stealth", "Cunning"]
     ability_level = {}
     new_card = {}
