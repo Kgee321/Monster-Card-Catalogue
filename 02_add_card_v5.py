@@ -2,6 +2,7 @@
 Asks user if the new card is correct
 Creating a join statement so dictionary
 output looks neat
+Put a character boundry on name
 Written by Katelyn
 Created on 2/05/2023
 """
@@ -15,8 +16,22 @@ monster_cards = {}
 ability_level = {}
 new_card = {}
 
-# Asking user to enter monster card name
-card_name = easygui.enterbox("Please enter your chosen Monster Card name: ").title()
+# Loop for character checker
+while True:
+    # Asking user to enter monster card name
+    card_name = easygui.enterbox("Please enter your chosen Monster Card name: ").title()
+
+    # Upper string boundary
+    if len(card_name) > 20:
+        easygui.msgbox("Wrong Input. Please enter less than 20 letters")
+
+    # Lower string boundary
+    elif len(card_name) < 1:
+        easygui.msgbox("Wrong Input. Please more than 1 letters")
+
+    # Input correct
+    else:
+        break
 
 # Loop for the 4 attributes
 for item in attributes:
@@ -39,7 +54,6 @@ for key, value in new_card.items():
     # Formatting dictionary inside dictionary
     for key2, value2 in value.items():
         message += f"- {key2}: {value2} \n"
-
 
 # Output results and asking if correct results
 answer = easygui.buttonbox("The new Monster Card is: \n\n"
