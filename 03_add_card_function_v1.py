@@ -93,7 +93,8 @@ def add():
 
     # User enters no
     elif answer == "No":
-        easygui.msgbox("Goes to edit card function", "New Card added incorrect")
+        easygui.msgbox("So sorry. Lets make some changes!",
+                       "New Card incorrect")
 
 
 # All monster cards
