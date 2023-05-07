@@ -1,9 +1,8 @@
-""" Component 3 -- Edit card (version 2)
-Trial 2 -- Using one statement
-Adding in Joinning function for neat dictionary
-Adding in other 4 attributes buttons using a for loop
-and a list.
-This code will be used in future code
+""" Component 3 -- Edit card (version 3)
+Trial 2
+Using an if statement and else so user can change
+the attribute values. Code is significantly
+shorter than the other 2 trials
 Created on the 7/05/2023
 """
 
@@ -37,12 +36,15 @@ edit_card = {
 # Loop for editing the card
 while True:
 
+    # Formatted dictionary
+    edit_card_format = joinning(edit_card)
+
     # Asking what user wants to edit
     what_edit = easygui.buttonbox("What part of this card would you like to edit: \n"
-                                  f"{edit_card}", "Editing card",
+                                  f"{edit_card_format}", "Editing card",
                                   choices=["Name", "Strength", "Speed",
                                            "Stealth", "Cunning",
-                                           "Nothing"])
+                                           "Exit"])
 
     # Loop for access dictionary values
     for original_name, original_value in edit_card.items():
@@ -61,34 +63,18 @@ while True:
             del edit_card[original_name]
             break
 
-        # Button if an attribute being changed
+        # User wants to leave exit card program
+        elif what_edit == "Exit":
+
+            # Happy message
+            easygui.msgbox("Ok!", "Changes complete")
+            break
+
         else:
 
-            for adjectives in original_value.keys():
+            # Asking for new level
+            edit_level = easygui.integerbox(f"Enter the new level of {what_edit}",
+                                            f"{what_edit} new level")
 
-                if adjectives == what_edit:
-
-                    # Asking for new level
-                    edit_level = easygui.integerbox(f"Enter the new level of {adjectives}",
-                                                    f"{adjectives} new level")
-
-                    # Adding level change
-                    edit_card[original_name][adjectives] = edit_level
-
-    # If card not changing
-    if what_edit == "Nothing":
-        # Happy message
-        easygui.msgbox("Ok!", "No changes needed")
-        break
-
-
-
-
-
-""" Component 3 -- Edit card (version 3)
-Adding in attribute list to avoid repeated code
-A loop added so don't have to repeat
-if statements
-Written by Katelyn Gee
-Created on the 5/05/2023
-"""
+            # Adding level change
+            edit_card[original_name][what_edit] = edit_level
