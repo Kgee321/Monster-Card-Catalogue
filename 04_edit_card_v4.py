@@ -4,6 +4,7 @@ Use a for in range loop and a separate list
 of attributes in order to change the
 attributes values.
 Code works but is unnecessary long.
+Written by Katelyn
 Created on the 7/05/2023
 """
 
