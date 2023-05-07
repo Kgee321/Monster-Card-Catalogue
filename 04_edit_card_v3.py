@@ -2,7 +2,9 @@
 Trial 2
 Using an if statement and else so user can change
 the attribute values. Code is significantly
-shorter than the other 2 trials
+shorter than the other 2 trials.
+This code will be used in the future program
+Written by Katelyn
 Created on the 7/05/2023
 """
 
@@ -45,6 +47,12 @@ while True:
                                   choices=["Name", "Strength", "Speed",
                                            "Stealth", "Cunning",
                                            "Exit"])
+    # User wants to leave exit card program
+    if what_edit == "Exit":
+
+        # Happy message
+        easygui.msgbox("Ok!", "Changes complete")
+        break
 
     # Loop for access dictionary values
     for original_name, original_value in edit_card.items():
@@ -61,13 +69,6 @@ while True:
 
             # Deleting old card and ending loop
             del edit_card[original_name]
-            break
-
-        # User wants to leave exit card program
-        elif what_edit == "Exit":
-
-            # Happy message
-            easygui.msgbox("Ok!", "Changes complete")
             break
 
         else:
