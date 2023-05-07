@@ -1,4 +1,4 @@
-""" Component 2 -- Add Card (version 4)
+""" Component 2 -- Add Card Function (version 1)
 Convert code into a recyclable function
 where appropriate.
 Also put the joinning the dictionary into
