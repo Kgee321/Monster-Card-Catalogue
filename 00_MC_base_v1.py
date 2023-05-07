@@ -20,7 +20,7 @@ def joinning(dic):
 
     # Joinning the dictionary inputted
     for key, value in dic.items():
-        message = f"{key}:\n"
+        message += f"{key}:\n"
 
         # Formatting dictionary inside dictionary
         for key2, value2 in value.items():
@@ -87,16 +87,64 @@ def add():
                                f"Is this new Monster Card correct?",
                                choices=["Yes", "No"])
 
-    # User enters yes
-    if answer == "Yes":
-        easygui.msgbox("Great! This New Combo was added", "New Combo Added")
-        monster_cards.update(new_card)
-        print(monster_cards)
-
     # User enters no
-    elif answer == "No":
-        easygui.msgbox("So Sorry! Lets make some changes",
+    if answer == "No":
+        easygui.msgbox("So sorry. Lets make some changes!",
                        "New Card incorrect")
+        edit(new_card)
+
+    # Card being added
+    easygui.msgbox("Great! This New Combo was added",
+                   "New Combo Added")
+    monster_cards.update(new_card)
+
+
+# Function to edit a card
+def edit(edit_card):
+
+    # Loop for editing the card
+    while True:
+
+        # Formatted dictionary
+        edit_card_format = joinning(edit_card)
+
+        # Asking what user wants to edit
+        what_edit = easygui.buttonbox("What part of this card would you like to edit: \n"
+                                      f"{edit_card_format}", "Editing card",
+                                      choices=["Name", "Strength", "Speed",
+                                               "Stealth", "Cunning",
+                                               "Exit"])
+
+        # User wants to leave exit card program
+        if what_edit == "Exit":
+            break
+
+        # Loop for access dictionary values
+        for original_name, original_value in edit_card.items():
+
+            # Changing name
+            if what_edit == "Name":
+
+                # Asking what user want to change name to
+                edit_name = char_boundary(1, 20, "Enter the new card name",
+                                          "Editing card name")
+
+                # Adding name change to final dictionary
+                edit_card[edit_name] = original_value
+
+                # Deleting old card and ending loop
+                del edit_card[original_name]
+                break
+
+            else:
+
+                # Asking for new level
+                edit_level = easygui.integerbox(f"Enter the new level of {what_edit}",
+                                                f"{what_edit} new level",
+                                                upperbound=25, lowerbound=1)
+
+                # Adding level change
+                edit_card[original_name][what_edit] = edit_level
 
 
 # Searching the cards functions
@@ -181,9 +229,11 @@ easygui.msgbox("Welcome to Monster Card Catalogue! \n"
 while True:
 
     # Asking user what they want to do with the monster cards
-    options = easygui.buttonbox("Enter what you would like to do with the Monster Cards: \n",
+    options = easygui.buttonbox("Enter what you would like to do with "
+                                "the Monster Cards: \n",
                                 "Home Screen",
-                                choices=["Add", "Search", "Delete", "Print", "Exit"])
+                                choices=["Add", "Search", "Delete",
+                                         "Print", "Exit"])
 
     # If user want to add a card
     if options == "Add":
@@ -199,7 +249,7 @@ while True:
 
     # If user want to print all cards
     elif options == "Print":
-        printing()
+        joinning(monster_cards)
 
     # If user want to leave code
     elif options == "Exit":
