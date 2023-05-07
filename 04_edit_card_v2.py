@@ -4,6 +4,7 @@ Adding in other 4 attribute buttons using
 another for loop.
 Code works well but quite long.
 Adding in Joinning function for neat dictionary
+Written by Katelyn
 Created on the 5/05/2023
 """
 
