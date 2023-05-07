@@ -29,7 +29,7 @@ while True:
                                   f"{edit_card}", "Editing card",
                                   choices=["Name", "Strength", "Speed",
                                            "Stealth", "Cunning",
-                                           "Nothing"])
+                                           "Exit"])
 
     # Loop for access dictionary values
     for original_name, original_value in edit_card.items():
@@ -49,7 +49,7 @@ while True:
             break
 
     # If card not changing
-    if what_edit == "Nothing":
+    if what_edit == "Exit":
         # Happy message
         easygui.msgbox("Ok!", "No changes needed")
         break
