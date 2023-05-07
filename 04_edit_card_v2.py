@@ -1,8 +1,9 @@
 """ Component 3 -- Edit card (version 2)
-Trial 1 -- multiple dictionary's to replace values
-Adding in Joinning function for neat dictionary
+Trial 1
 Adding in other 4 attribute buttons using
-if statements- the attributes
+another for loop.
+Code works well but quite long.
+Adding in Joinning function for neat dictionary
 Created on the 5/05/2023
 """
 
@@ -33,18 +34,18 @@ edit_card = {
          "Cunning": 15},
 }
 
-# Attributes
-attributes = ["Strength", "Speed", "Stealth", "Cunning"]
-
 # Loop for editing the card
 while True:
 
+    # Formatted dictionary
+    edit_card_format = joinning(edit_card)
+
     # Asking what user wants to edit
     what_edit = easygui.buttonbox("What part of this card would you like to edit: \n"
-                                  f"{edit_card}", "Editing card",
+                                  f"{edit_card_format}", "Editing card",
                                   choices=["Name", "Strength", "Speed",
                                            "Stealth", "Cunning",
-                                           "Nothing"])
+                                           "Exit"])
 
     # Loop for access dictionary values
     for original_name, original_value in edit_card.items():
@@ -79,19 +80,8 @@ while True:
                 break
 
     # If card not changing
-    if what_edit == "Nothing":
+    if what_edit == "Exit":
+
         # Happy message
-        easygui.msgbox("Ok!", "No changes needed")
+        easygui.msgbox("Ok!", "Changes complete")
         break
-
-
-
-
-
-""" Component 3 -- Edit card (version 3)
-Adding in attribute list to avoid repeated code
-A loop added so don't have to repeat
-if statements
-Written by Katelyn Gee
-Created on the 5/05/2023
-"""
