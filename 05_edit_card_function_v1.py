@@ -57,7 +57,7 @@ def edit(edit_card):
         edit_card_format = joinning(edit_card)
 
         # Asking what user wants to edit
-        what_edit = easygui.buttonbox("What part of this card would you like to edit: \n"
+        what_edit = easygui.buttonbox("What part of this card would you like to edit: \n\n"
                                       f"{edit_card_format}", "Editing card",
                                       choices=["Name", "Strength", "Speed",
                                                "Stealth", "Cunning",
