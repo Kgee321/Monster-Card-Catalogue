@@ -34,10 +34,15 @@ def char_boundary(lower, upper, question_message, box):
     # Loop for character checker
     while True:
         # Asking user to enter monster card name
-        question = easygui.enterbox(question_message, box).title()
+        question = easygui.enterbox(question_message, box)
+
+        # Cancel button entered
+        if not question:
+            easygui.msgbox("Wrong Input. Filed requires an answers",
+                           "No answer")
 
         # Upper string boundary
-        if len(question) > upper:
+        elif len(question) > upper:
             easygui.msgbox("Wrong Input. Please enter less than 20 letters",
                            "Number to high")
 
@@ -48,7 +53,7 @@ def char_boundary(lower, upper, question_message, box):
 
         # Input correct
         else:
-            return question
+            return question.title()
 
 
 # Function for adding a new Monster Card
@@ -249,7 +254,8 @@ while True:
 
     # If user want to print all cards
     elif options == "Print":
-        joinning(monster_cards)
+        easygui.msgbox(joinning(monster_cards))
+        print(monster_cards)
 
     # If user want to leave code
     elif options == "Exit":
