@@ -3,7 +3,8 @@ Convert code into a recyclable function
 where appropriate.
 Also put the joinning the dictionary into
 a recyclable function
-Also another function for character checking
+Also another function for character checking and
+making sure code works if cancel button entered
 Making sure all easygui boxes are named
 Written by Katelyn
 Created on 3/05/2023
@@ -32,10 +33,15 @@ def char_boundary(lower, upper, question_message, box):
     # Loop for character checker
     while True:
         # Asking user to enter monster card name
-        question = easygui.enterbox(question_message, box).title()
+        question = easygui.enterbox(question_message, box)
+
+        # Cancel button entered
+        if not question:
+            easygui.msgbox("Wrong Input. Filed requires an answers",
+                           "No answer")
 
         # Upper string boundary
-        if len(question) > upper:
+        elif len(question) > upper:
             easygui.msgbox("Wrong Input. Please enter less than 20 letters",
                            "Number to high")
 
@@ -46,7 +52,7 @@ def char_boundary(lower, upper, question_message, box):
 
         # Input correct
         else:
-            return question
+            return question.title()
 
 
 # Function for adding a new Monster Card
