@@ -1,4 +1,4 @@
-""" Component 4 -- Search Cards (version 2)
+""" Component 4 -- Search Cards (version 4)
 Adding onto search_cards_v3.
 Adding a loop for testing
 Adding the char_boundry so input it correct
@@ -82,21 +82,22 @@ monster_cards = {
          "Cunning": 2}
 }
 
-# Variable setting
-value = True
+while True:
+    # Variable setting
+    value = True
 
-# User enters search
-searching = char_boundary(1, 20,
-                          "What combo or combo item are you looking for? ")
+    # User enters search
+    searching = char_boundary(1, 20,
+                              "What Monster Card are you looking for? ")
 
-# Loop to access all dictionary items
-for name_com, item_com in monster_cards.items():
+    # Loop to access all dictionary items
+    for name_card, item_card in monster_cards.items():
 
-    # If search is in monster card name
-    if searching in name_com:
-        print(f"The Monster Card named {name_com} has {item_com}")
-        value = False
+        # If search is in monster card name
+        if searching in name_card:
+            print(f"The Monster Card named {name_card} has {item_card}")
+            value = False
 
-# Warning message if search not in monster cards
-if value:
-    print("Sorry, input not in the combos")
+    # Warning message if search not in monster cards
+    if value:
+        print("Sorry, input not a Monster Card")
