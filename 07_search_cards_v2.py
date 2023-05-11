@@ -67,18 +67,18 @@ monster_cards = {
 count = 0
 
 # User enters search
-searching = input("What combo or combo item are you looking for? ").title()
+searching = input("What Monster Card are you looking for? ").title()
 
 # Loop to access all dictionary items
-for name_com, item_com in monster_cards.items():
+for name_card, item_card in monster_cards.items():
 
     # If search is in monster card name
-    if searching in name_com:
-        print(f"The Monster Card named {name_com} has {item_com}")
+    if searching in name_card:
+        print(f"The Monster Card named {name_card} has {item_card}")
 
     else:
         count += 1
 
 # Warning message if search not in monster cards
 if count == len(monster_cards):
-    print("Sorry, input not in the combos")
+    print("Sorry, input not in a Monster Card")
