@@ -1,4 +1,4 @@
-""" Component 4 -- Search Cards (version 2)
+""" Component 4 -- Search Cards (version 3)
 Trial 2 -- Boolean variable
 Same code as search_cards_v2 but uses a boolean
 to find if search not in monster cards
@@ -66,16 +66,16 @@ monster_cards = {
 value = True
 
 # User enters search
-searching = input("What combo or combo item are you looking for? ").title()
+searching = input("What Monster Card are you looking for? ").title()
 
 # Loop to access all dictionary items
-for name_com, item_com in monster_cards.items():
+for name_card, item_card in monster_cards.items():
 
     # If search is in monster card name
-    if searching in name_com:
-        print(f"The Monster Card named {name_com} has {item_com}")
+    if searching in name_card:
+        print(f"The Monster Card named {name_card} has {item_card}")
         value = False
 
 # Warning message if search not in monster cards
 if value:
-    print("Sorry, input not in the combos")
+    print("Sorry, input not a Monster Card")
