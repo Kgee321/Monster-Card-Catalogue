@@ -70,4 +70,4 @@ if searching in monster_cards.keys():
 
 # If searching not in dictionary
 else:
-    print("Sorry, input is not a Monster Card name")
+    print("Sorry, input is not a Monster Card")
