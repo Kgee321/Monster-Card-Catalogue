@@ -3,7 +3,9 @@ Trial 1
 Adding in other 4 attribute buttons using
 another for loop.
 Code works well but quite long.
-Adding in Joinning function for neat dictionary
+Adding in Joinning function for neat dictionary.
+Code uses two loops to find attributes which is
+unnecessary.
 Written by Katelyn
 Created on the 5/05/2023
 """
