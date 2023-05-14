@@ -125,8 +125,6 @@ while True:
                               "What Monster Card are you looking for? ",
                               "Searching Monster Cards")
 
-    print(searching)
-
     # Loop to access all dictionary items
     for name_card, item_card in monster_cards.items():
 

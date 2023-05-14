@@ -20,7 +20,7 @@ def joinning(dic):
 
     # Joinning the dictionary inputted
     for key, value in dic.items():
-        message += f"{key}:\n"
+        message += f"\n{key}:\n"
 
         # Formatting dictionary inside dictionary
         for key2, value2 in value.items():
