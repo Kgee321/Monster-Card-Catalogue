@@ -2,8 +2,8 @@
 Trial 2
 Using an if statement and else so user can change
 the attribute values. Code is significantly
-shorter than the other 2 trials.
-This code will be used in the future program
+shorter than the 1st trial but still uses
+an unnecessary loop.
 Written by Katelyn
 Created on the 7/05/2023
 """
