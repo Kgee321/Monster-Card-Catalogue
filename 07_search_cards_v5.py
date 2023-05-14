@@ -117,7 +117,6 @@ monster_cards = {
 while True:
     # Variable setting
     var = True
-    names_searched = []
     cards_in_search = {}
 
     # User enters search
@@ -133,9 +132,6 @@ while True:
 
             # Code knows search is in monster cards
             var = False
-
-            # Joinning second dictionary together
-            # names_searched.append(name_card)
 
             # Adding card to dictionary
             cards_in_search[name_card] = monster_cards[name_card]
