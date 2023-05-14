@@ -80,9 +80,6 @@ def edit(edit_card):
 
         # User wants to leave exit card program
         if what_edit == "Exit":
-
-            # Happy message
-            easygui.msgbox("Ok!", "Changes complete")
             break
 
         # Changing name
