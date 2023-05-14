@@ -87,8 +87,8 @@ def add():
     new_card_formatted = joinning(new_card)
 
     # Output results and asking if correct results
-    answer = easygui.buttonbox("The new Monster Card is: \n\n"
-                               f"{new_card_formatted} \n\n"
+    answer = easygui.buttonbox("The new Monster Card is: \n"
+                               f"{new_card_formatted} \n"
                                f"Is this new Monster Card correct?",
                                choices=["Yes", "No"])
 
@@ -120,36 +120,33 @@ def edit(edit_card):
                                                "Stealth", "Cunning",
                                                "Exit"])
 
+        # Setting value of the original edit card name
+        original_name = next(iter(edit_card))
+
         # User wants to leave exit card program
         if what_edit == "Exit":
             break
 
-        # Loop for access dictionary values
-        for original_name, original_value in edit_card.items():
+        # Changing name
+        elif what_edit == "Name":
 
-            # Changing name
-            if what_edit == "Name":
+            # Asking what user want to change name to
+            edit_name = char_boundary(1, 20, "Enter the new card name: ",
+                                      "Editing card name")
 
-                # Asking what user want to change name to
-                edit_name = char_boundary(1, 20, "Enter the new card name",
-                                          "Editing card name")
+            # Adding name change to final dictionary
+            edit_card[edit_name] = edit_card.pop(original_name)
 
-                # Adding name change to final dictionary
-                edit_card[edit_name] = original_value
+        else:
 
-                # Deleting old card and ending loop
-                del edit_card[original_name]
-                break
+            # Asking for new level
+            edit_level = easygui.integerbox(f"Enter the new level of {what_edit}",
+                                            f"{what_edit} new level",
+                                            upperbound=25,
+                                            lowerbound=1)
 
-            else:
-
-                # Asking for new level
-                edit_level = easygui.integerbox(f"Enter the new level of {what_edit}",
-                                                f"{what_edit} new level",
-                                                upperbound=25, lowerbound=1)
-
-                # Adding level change
-                edit_card[original_name][what_edit] = edit_level
+            # Adding level change
+            edit_card[original_name][what_edit] = edit_level
 
 
 # Searching the cards functions
@@ -254,8 +251,7 @@ while True:
 
     # If user want to print all cards
     elif options == "Print":
-        easygui.msgbox(joinning(monster_cards))
-        print(monster_cards)
+        print(joinning(monster_cards))
 
     # If user want to leave code
     elif options == "Exit":
