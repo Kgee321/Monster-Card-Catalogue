@@ -2,9 +2,14 @@
 Removing testing loop from version 4
 Converting to easygui
 Asking user if card is correct or not
+Asking user what card they want to edit if
+2 were searched for.
 Changing char_boundary to use easygui
 Adding in the joinning function for neat
 dictionary output
+Adding in option for user to say if card
+is wrong.
+Renaming repeated variable names
 Written by Katelyn Gee
 Created on the 11/05/2023
 """
@@ -15,10 +20,11 @@ import easygui
 # Function for joinning dictionary's
 def joinning(dic):
     message = ""
+    print(dic)
 
     # Joinning the dictionary inputted
     for key, value in dic.items():
-        message += f"{key}:\n"
+        message += f"\n{key}:\n"
 
         # Formatting dictionary inside dictionary
         for key2, value2 in value.items():
@@ -110,20 +116,62 @@ monster_cards = {
 
 while True:
     # Variable setting
-    value = True
+    var = True
+    names_searched = []
+    cards_in_search = {}
 
     # User enters search
     searching = char_boundary(1, 20,
-                              "What Monster Card are you looking for? ")
+                              "What Monster Card are you looking for? ",
+                              "Searching Monster Cards")
+
+    print(searching)
 
     # Loop to access all dictionary items
     for name_card, item_card in monster_cards.items():
 
         # If search is in monster card name
         if searching in name_card:
-            easygui.buttonbox(f"The Monster Card named {name_card} has {item_card}")
-            value = False
 
-    # Warning message if search not in monster cards
-    if value:
-        print("Sorry, input not a Monster Card")
+            # Code knows search is in monster cards
+            var = False
+
+            # Joinning second dictionary together
+            # names_searched.append(name_card)
+
+            # Adding card to dictionary
+            cards_in_search[name_card] = monster_cards[name_card]
+
+    # Warning message if search not in monster cards and code ending
+    if var:
+        easygui.msgbox("Sorry, input not in Monster Cards",
+                       "Not in Monster Cards")
+        break
+
+    # Formatting dictionary nicely
+    formatted_item = joinning(cards_in_search)
+
+    # Checking if monster card is correct
+    correct = easygui.buttonbox(f"Here are the following Monster Cards searched for: \n"
+                                f"{formatted_item}\n"
+                                f"Are these results correct?",
+                                choices=["Yes", "No"])
+
+    # If card is correct
+    if correct == "Yes":
+        easygui.msgbox("Great!", "Card Correct")
+        break
+
+    # If more than 1 search result
+    if len(cards_in_search) >= 2:
+        card_to_edit = easygui.buttonbox(f"What Monster Card would you like to edit:",
+                                         "Choosing a Card",
+                                         choices=list(cards_in_search.keys()))
+    else:
+        card_to_edit = next(iter(cards_in_search))
+
+    # Monster Card to edit
+    easygui.msgbox(f"Continue to editing function with monster card {card_to_edit}",
+                   "Edit Function")
+    break
+
