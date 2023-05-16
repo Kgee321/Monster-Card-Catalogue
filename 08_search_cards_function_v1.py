@@ -6,7 +6,7 @@ Adding in Joinning function
 Changing char_boundary function so that
 it uses easygui
 Written by Katelyn Gee
-Created on the 11/05/2023
+Created on the 12/05/2023
 """
 
 import easygui
@@ -94,12 +94,9 @@ def search(action, message, other_action):
                                     choices=["Yes", "No"])
 
         # If card is correct
-        if correct == "Yes" and action == "search":
-            easygui.msgbox("Great!", "Card Correct")
+        if correct == "No":
+            easygui.msgbox("Great!", "Card is Correct")
             break
-
-        elif correct == "no" and action == "delete":
-            pass
 
         # If more than 1 search result
         if len(cards_in_search) >= 2:
@@ -124,6 +121,7 @@ def search(action, message, other_action):
 
             # Telling user card has been deleted
             easygui.msgbox(f"{card_to_edit} has been {other_action}d")
+            break
 
 
 # Pre Stored Monster Cards dictionary
@@ -181,6 +179,5 @@ monster_cards = {
 }
 
 # Calling on function
-search("search", "Are these results correct?", "edit")
+search("search", "Are any of these card incorrect?", "edit")
 
-search("delete", "Do you want to delete any of these cards?", "delete")
