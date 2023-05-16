@@ -101,7 +101,6 @@ def add():
     # Card being added
     easygui.msgbox("Great! This New Combo was added",
                    "New Combo Added")
-    monster_cards.update(new_card)
 
 
 # Function to edit a card
@@ -147,6 +146,9 @@ def edit(edit_card):
 
             # Adding level change
             edit_card[original_name][what_edit] = edit_level
+
+    # Adding card to monster cards
+    monster_cards.update(edit_card)
 
 
 # Searching the cards functions
