@@ -112,3 +112,6 @@ monster_card = {
 
 # Calling on edit function
 edit(monster_card)
+
+# Output Monster cards
+print(joinning(monster_card))
