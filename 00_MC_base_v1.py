@@ -6,7 +6,7 @@ Not much editing done to the code
 When input code entered, changing it to use
 the char_boundary function to put word
 limit on inputs.
-Added components 1, 2, and 3.
+Added components 1, 2, 3 and 4.
 Written by Katelyn Gee
 Created on the 1/05/2023
 """
@@ -151,9 +151,81 @@ def edit(edit_card):
     monster_cards.update(edit_card)
 
 
-# Searching the cards functions
-def search():
-    pass
+# Function for finding cards in monster cards
+def search(action, message, other_action):
+    while True:
+        # Variable setting
+        var = True
+        cards_in_search = {}
+
+        # User enters search
+        searching = char_boundary(1, 20,
+                                  f"Enter what you want to {action} in Monster Cards:",
+                                  f"{action.title()} Monster Cards")
+
+        # Loop to access all dictionary items
+        for name_card, item_card in monster_cards.items():
+
+            # If search is in monster card name
+            if searching in name_card:
+
+                # Code knows search is in monster cards
+                var = False
+
+                # Adding card to dictionary
+                cards_in_search[name_card] = monster_cards[name_card]
+
+        # Warning message if search not in monster cards and code ending
+        if var:
+            easygui.msgbox("Sorry, input not in Monster Cards",
+                           "Not in Monster Cards")
+            break
+
+        # Formatting dictionary nicely
+        formatted_item = joinning(cards_in_search)
+
+        # Checking if monster card is correct
+        correct = easygui.buttonbox(f"Here are the following Monster Cards found: \n"
+                                    f"{formatted_item}\n"
+                                    f"{message}",
+                                    choices=["Yes", "No"])
+
+        # If card is correct
+        if correct == "No":
+            easygui.msgbox("Great!", "Card is Correct")
+            break
+
+        # If more than 1 search result
+        if len(cards_in_search) >= 2:
+            card_to_edit = easygui.buttonbox(f"What Monster Card would you like to {other_action}:",
+                                             "Choosing a Card",
+                                             choices=list(cards_in_search.keys()))
+            cards_in_search = {card_to_edit: monster_cards[card_to_edit]}
+        else:
+            card_to_edit = next(iter(cards_in_search))
+
+        # Editing car
+        if action == "search":
+
+            # Editing monster card
+            edit(cards_in_search)
+
+            # Leaving message
+            easygui.msgbox("Ok! Monster card has been changed")
+
+            # Removing old Monster card
+            del monster_cards[card_to_edit]
+
+            break
+
+        else:
+
+            # Deleting monster card
+            del monster_cards[card_to_edit]
+
+            # Telling user card has been deleted
+            easygui.msgbox(f"{card_to_edit} has been {other_action}d")
+            break
 
 
 # Delete a card functions
@@ -245,7 +317,7 @@ while True:
 
     # If user wants to find cards
     elif options == "Search":
-        search()
+        search("search", "Are any of these card incorrect?", "edit")
 
     # If user wants to delete a card
     elif options == "Delete":
