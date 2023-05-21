@@ -158,14 +158,14 @@ def search_delete(action, message, other_action):
         # Editing car
         if action == "search":
 
+            # Removing old Monster card
+            del monster_cards[card_to_edit]
+
             # Editing monster card
-            edit(cards_in_search)
+            edit({card_to_edit: cards_in_search[card_to_edit]})
 
             # Leaving message
             easygui.msgbox("Ok! Monster card has been changed")
-
-            # Removing old Monster card
-            del monster_cards[card_to_edit]
 
             break
 
