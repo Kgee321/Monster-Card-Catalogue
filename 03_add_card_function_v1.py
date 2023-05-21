@@ -93,9 +93,9 @@ def add():
 
     # User enters yes
     if answer == "Yes":
-        easygui.msgbox("Great! This New Combo was added", "New Combo Added")
+
+        easygui.msgbox("Great! This New Card was added", "New Card Added")
         monster_cards.update(new_card)
-        print(monster_cards)
 
     # User enters no
     elif answer == "No":
@@ -108,3 +108,6 @@ monster_cards = {}
 
 # Calling on add new card function
 add()
+
+# Printing card for testing
+print(monster_cards)
