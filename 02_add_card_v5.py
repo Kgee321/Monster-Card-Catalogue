@@ -63,7 +63,7 @@ answer = easygui.buttonbox("The new Monster Card is: \n\n"
 
 # User enters yes
 if answer == "Yes":
-    easygui.msgbox("Great! This New Combo was added", "New Combo Added")
+    easygui.msgbox("Great! This New Card was added", "New Card Added")
     monster_cards.update(new_card)
     print(monster_cards)
 
