@@ -98,9 +98,14 @@ def add():
                        "New Card incorrect")
         edit(new_card)
 
+    # Adding new card
+    else:
+
+        monster_cards.update(new_card)
+
     # Card being added
-    easygui.msgbox("Great! This New Combo was added",
-                   "New Combo Added")
+    easygui.msgbox("Great! This New Card was added",
+                   "New Card Added")
 
 
 # Function to edit a card
