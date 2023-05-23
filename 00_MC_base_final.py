@@ -4,8 +4,11 @@ End user changes made when mistakes found
 and advise from family members changed.
 This includes changing a few outputs to make
 instruction more clear.
-Also changes to the add function so user is warned
-if same card entered.
+Added the ability to warn user if new card is
+already a card in add() and edit() using the
+char_boundary() function.
+Cancel button sends user back to start to avoid
+frustration.
 Written by Katelyn Gee
 Created on the 21/05/2023
 """
@@ -14,7 +17,7 @@ import easygui
 
 
 # Function for checking characters stay in letter boundary
-def char_boundary(lower, upper, question_message, box):
+def char_boundary(lower, upper, question_message, box, new):
     # Loop for character checker
     while True:
         # Asking user to enter monster card name
@@ -22,8 +25,7 @@ def char_boundary(lower, upper, question_message, box):
 
         # Cancel button entered
         if not question:
-            easygui.msgbox("Wrong Input. Filed requires an answers",
-                           "No answer")
+            return "return"
 
         # Upper string boundary
         elif len(question) > upper:
@@ -34,6 +36,22 @@ def char_boundary(lower, upper, question_message, box):
         elif len(question) < lower:
             easygui.msgbox("Wrong Input. Please more than 1 letter",
                            "Number to low")
+
+        # Finding in input already a monster card
+        elif question.title() in monster_cards.keys() and new:
+
+            choice = easygui.buttonbox(f"{question} is already a monster card, "
+                                       f"did you still wish to continue? \n"
+                                       f"If you do, the old monster card will be changed",
+                                       "Name in Monster Cards",
+                                       choices=["Yes", "No"])
+
+            # Function restarting if user enters no
+            if choice == "No":
+                return "No"
+
+            else:
+                return question.title()
 
         # Input correct
         else:
@@ -50,21 +68,16 @@ def add():
     # Asking user to enter monster card name with character checker
     card_name = char_boundary(1, 20,
                               "Please enter your chosen Monster Card name: ",
-                              "Card Name")
+                              "Card Name", True)
 
-    # Telling user if name already a card
-    if card_name in monster_cards.keys():
+    # If card name already in cards
+    if card_name == "No":
+        add()
+        return
 
-        choice = easygui.buttonbox(f"{card_name} is already a monster card, "
-                                   f"did you still wish to continue? \n"
-                                   f"If you do, the old monster card will be changed",
-                                   "Name in Monster Cards",
-                                   choices=["Yes", "No"])
-
-        # Function restarting if user enters no
-        if choice == "No":
-            add()
-            return
+    # Cancel button pressed
+    elif card_name == "return":
+        return
 
     # Loop for the 4 attributes
     for item in attributes:
@@ -131,7 +144,11 @@ def edit(edit_card):
 
             # Asking what user want to change name to
             edit_name = char_boundary(1, 20, "Enter the new card name: ",
-                                      "Editing card name")
+                                      "Editing card name", True)
+
+            # If monster card already in card
+            if edit_name == "No:" or edit_name == "return":
+                edit_name = original_name
 
             # Adding name change to final dictionary
             edit_card[edit_name] = edit_card.pop(original_name)
@@ -161,7 +178,11 @@ def search_delete(action, message, other_action):
         # User enters search
         searching = char_boundary(1, 20,
                                   f"Enter what you want to {action} in Monster Cards:",
-                                  f"{action.title()} Monster Cards")
+                                  f"{action.title()} Monster Cards", False)
+
+        # Cancel button
+        if searching == "returning":
+            return
 
         # Loop to access all dictionary items
         for name_card, item_card in monster_cards.items():
