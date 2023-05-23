@@ -2,6 +2,10 @@
 Final code to monster card catalogue
 End user changes made when mistakes found
 and advise from family members changed.
+This includes changing a few outputs to make
+instruction more clear.
+Also changes to the add function so user is warned
+if same card entered.
 Written by Katelyn Gee
 Created on the 21/05/2023
 """
@@ -28,7 +32,7 @@ def char_boundary(lower, upper, question_message, box):
 
         # Lower string boundary
         elif len(question) < lower:
-            easygui.msgbox("Wrong Input. Please more than 1 letters",
+            easygui.msgbox("Wrong Input. Please more than 1 letter",
                            "Number to low")
 
         # Input correct
@@ -38,7 +42,6 @@ def char_boundary(lower, upper, question_message, box):
 
 # Function for adding a new Monster Card
 def add():
-
     # Variable setting
     attributes = ["Strength", "Speed", "Stealth", "Cunning"]
     ability_level = {}
@@ -48,6 +51,20 @@ def add():
     card_name = char_boundary(1, 20,
                               "Please enter your chosen Monster Card name: ",
                               "Card Name")
+
+    # Telling user if name already a card
+    if card_name in monster_cards.keys():
+
+        choice = easygui.buttonbox(f"{card_name} is already a monster card, "
+                                   f"did you still wish to continue? \n"
+                                   f"If you do, the old monster card will be changed",
+                                   "Name in Monster Cards",
+                                   choices=["Yes", "No"])
+
+        # Function restarting if user enters no
+        if choice == "No":
+            add()
+            return
 
     # Loop for the 4 attributes
     for item in attributes:
@@ -89,7 +106,6 @@ def add():
 
 # Function to edit a card
 def edit(edit_card):
-
     # Loop for editing the card
     while True:
 
@@ -157,7 +173,7 @@ def search_delete(action, message, other_action):
                 var = False
 
                 # Adding card to dictionary
-                cards_in_search[name_card] = monster_cards[name_card]
+                cards_in_search[name_card] = item_card
 
         # Warning message if search not in monster cards and code ending
         if var:
@@ -177,7 +193,8 @@ def search_delete(action, message, other_action):
 
         # If card is correct
         if correct == "No":
-            easygui.msgbox(f"Ok, no {other_action} has been made to the catalogue", "Card is Correct")
+            easygui.msgbox(f"Ok, no {other_action} has been made to the catalogue",
+                           "Card is Correct")
             break
 
         # If more than 1 search result
@@ -185,13 +202,15 @@ def search_delete(action, message, other_action):
             card_to_edit = easygui.buttonbox(f"What Monster Card would you like to {other_action}:",
                                              "Choosing a Card",
                                              choices=list(cards_in_search.keys()))
+
+        # If only 1 result found
         else:
             card_to_edit = next(iter(cards_in_search))
 
         # Removing old Monster card
         del monster_cards[card_to_edit]
 
-        # Editing car
+        # Editing card
         if action == "search":
 
             # Editing monster card
@@ -210,7 +229,6 @@ def search_delete(action, message, other_action):
 
 # Function for connecting dictionaries to be printable
 def output_cards(pattern, dictionary):
-
     message = ""
 
     # loop to print dictionary
@@ -222,7 +240,6 @@ def output_cards(pattern, dictionary):
 
         # Loop to print dictionary inside the dictionary
         for item_in_card, level_of_item in card_items.items():
-
             # Card item and its level added
             message += f"{pattern} {item_in_card}: {level_of_item} \n"
 
@@ -289,7 +306,9 @@ easygui.msgbox("Welcome to Monster Card Catalogue! \n"
                "search cards, delete a card, "
                "or show all the cards in this program. "
                "Please select what you would "
-               "like to do on the next page."
+               "like to do on the next page. \n"
+               "A good place to start would be looking at "
+               "the cards \n(Show Cards button)."
                "\nEnjoy!", "Welcome and Instructions")
 
 # Loop so code ends when user wants it to
@@ -300,7 +319,7 @@ while True:
                                 "the Monster Cards: \n",
                                 "Home Screen",
                                 choices=["Add", "Search", "Delete",
-                                         "Print", "Exit"])
+                                         "Show Cards", "Exit"])
 
     # If user want to add a card
     if options == "Add":
@@ -319,7 +338,7 @@ while True:
         search_delete("delete", "Do you want to delete any of these cards?", "delete")
 
     # If user want to print all cards
-    elif options == "Print":
+    elif options == "Show Cards":
 
         # Output the monster cards
         print(output_cards("~", monster_cards))
