@@ -3,7 +3,7 @@ Adding char_boundry for changing name
 Adding a number boundry on level entry so
 number between 1 and 25
 Converting into a recyclable function
-Adding upper and lower boundary on integar
+Adding upper and lower boundary on integer
 Written by Katelyn
 Created on the 8/05/2023
 """
