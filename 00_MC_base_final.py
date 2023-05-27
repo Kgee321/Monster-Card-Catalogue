@@ -1,5 +1,5 @@
 """ Base Component -- Final Code
-Final code to monster card catalogue
+This is the Final code to monster card catalogue
 End user changes made when mistakes found
 and advise from family members changed.
 This includes changing a few outputs to make
@@ -40,9 +40,11 @@ def char_boundary(lower, upper, question_message, box, new):
         # Finding in input already a monster card
         elif question.title() in monster_cards.keys() and new:
 
-            choice = easygui.buttonbox(f"{question} is already a monster card, "
+            choice = easygui.buttonbox(f"{question} is already a "
+                                       f"monster card, "
                                        f"did you still wish to continue? \n"
-                                       f"If you do, the old monster card will be changed",
+                                       f"If you do, the old monster card "
+                                       f"will be changed",
                                        "Name in Monster Cards",
                                        choices=["Yes", "No"])
 
@@ -67,7 +69,8 @@ def add():
 
     # Asking user to enter monster card name with character checker
     card_name = char_boundary(1, 20,
-                              "Please enter your chosen Monster Card name: ",
+                              "Please enter your chosen "
+                              "Monster Card name: ",
                               "Card Name", True)
 
     # If card name already in cards
@@ -82,7 +85,8 @@ def add():
     # Loop for the 4 attributes
     for item in attributes:
         # Asking user to enter how much strength card has
-        number = easygui.integerbox(f"What is {card_name}'s level of {item}? \n"
+        number = easygui.integerbox(f"What is {card_name}'s level "
+                                    f"of {item}? \n"
                                     f"(Number between 1 and 25) \n",
                                     f"{item}", upperbound=25,
                                     lowerbound=1)
@@ -100,6 +104,7 @@ def add():
     answer = easygui.buttonbox("The new Monster Card is: \n"
                                f"{new_card_formatted} \n"
                                f"Is this new Monster Card correct?",
+                               "Checking Card",
                                choices=["Yes", "No"])
 
     # User enters no
@@ -126,8 +131,10 @@ def edit(edit_card):
         edit_card_format = output_cards("--", edit_card)
 
         # Asking what user wants to edit
-        what_edit = easygui.buttonbox("What part of this card would you like to edit: \n"
-                                      f"{edit_card_format}", "Editing card",
+        what_edit = easygui.buttonbox("What part of this card would "
+                                      "you like to edit: \n"
+                                      f"{edit_card_format}",
+                                      "Editing card",
                                       choices=["Name", "Strength", "Speed",
                                                "Stealth", "Cunning",
                                                "Exit"])
@@ -156,7 +163,8 @@ def edit(edit_card):
         else:
 
             # Asking for new level
-            edit_level = easygui.integerbox(f"Enter the new level of {what_edit}",
+            edit_level = easygui.integerbox(f"Enter the new level of "
+                                            f"{what_edit}",
                                             f"{what_edit} new level",
                                             upperbound=25,
                                             lowerbound=1)
@@ -177,11 +185,13 @@ def search_delete(action, message, other_action):
 
         # User enters search
         searching = char_boundary(1, 20,
-                                  f"Enter what you want to {action} in Monster Cards:",
-                                  f"{action.title()} Monster Cards", False)
+                                  f"Enter what you want to {action} "
+                                  f"in Monster Cards:",
+                                  f"{action.title()} Monster Cards",
+                                  False)
 
         # Cancel button
-        if searching == "returning":
+        if searching == "return":
             return
 
         # Loop to access all dictionary items
@@ -206,7 +216,8 @@ def search_delete(action, message, other_action):
         formatted_item = output_cards("--", cards_in_search)
 
         # Checking if monster card is correct
-        correct = easygui.buttonbox(f"Here are the following Monster Cards found: \n"
+        correct = easygui.buttonbox(f"Here are the following Monster "
+                                    f"Cards found: \n"
                                     f"{formatted_item}\n"
                                     f"{message}",
                                     f"Checking Monster Card found",
@@ -214,15 +225,19 @@ def search_delete(action, message, other_action):
 
         # If card is correct
         if correct == "No":
-            easygui.msgbox(f"Ok, no {other_action} has been made to the catalogue",
+            easygui.msgbox(f"Ok, no {other_action} has been made "
+                           f"to the catalogue",
                            "Card is Correct")
             break
 
         # If more than 1 search result
         if len(cards_in_search) >= 2:
-            card_to_edit = easygui.buttonbox(f"What Monster Card would you like to {other_action}:",
+            card_to_edit = easygui.buttonbox(f"What Monster Card would "
+                                             f"you like "
+                                             f"to {other_action}:",
                                              "Choosing a Card",
-                                             choices=list(cards_in_search.keys()))
+                                             choices=list
+                                             (cards_in_search.keys()))
 
         # If only 1 result found
         else:
@@ -238,13 +253,15 @@ def search_delete(action, message, other_action):
             edit({card_to_edit: cards_in_search[card_to_edit]})
 
             # Leaving message
-            easygui.msgbox("Ok! Monster card has been changed")
+            easygui.msgbox("Ok! Monster card has been changed",
+                           "Changes Completed")
             break
 
         else:
 
             # Telling user card has been deleted
-            easygui.msgbox(f"{card_to_edit} has been {other_action}d")
+            easygui.msgbox(f"{card_to_edit} has been {other_action}d",
+                           "Card Deleted")
             break
 
 
@@ -257,7 +274,7 @@ def output_cards(pattern, dictionary):
 
         # Card name added
         message += f"\n{name_of_card}\n"
-        message += f"{pattern}" * (len(name_of_card)) + f"\n"
+        message += f"{pattern}" * (len(name_of_card)) + "\n"
 
         # Loop to print dictionary inside the dictionary
         for item_in_card, level_of_item in card_items.items():
@@ -332,6 +349,7 @@ easygui.msgbox("Welcome to Monster Card Catalogue! \n"
                "the cards \n(Show Cards button)."
                "\nEnjoy!", "Welcome and Instructions")
 
+# Main Routine
 # Loop so code ends when user wants it to
 while True:
 
@@ -350,16 +368,24 @@ while True:
     elif options == "Search":
 
         # Calling on function to search card
-        search_delete("search", "Are any of these card incorrect?", "edit")
+        search_delete("search", "Are any of these card incorrect?",
+                      "edit")
 
     # If user wants to delete a card
     elif options == "Delete":
 
         # Calling on function to delete card
-        search_delete("delete", "Do you want to delete any of these cards?", "delete")
+        search_delete("delete", "Do you want to delete any of "
+                                "these cards?",
+                      "delete")
 
     # If user want to print all cards
     elif options == "Show Cards":
+
+        # Card Title
+        print(f"{'-'* 24}\n"
+              "MONSTER CARDS CATALOGUE\n"
+              f"{'-'* 24}")
 
         # Output the monster cards
         print(output_cards("~", monster_cards))
