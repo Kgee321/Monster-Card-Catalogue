@@ -175,7 +175,8 @@ def search_delete(action, message, other_action):
             del monster_cards[card_to_edit]
 
             # Telling user card has been deleted
-            easygui.msgbox(f"{card_to_edit} has been {other_action}d")
+            easygui.msgbox(f"{card_to_edit} has been {other_action}d",
+                           "Card Deleted")
             break
 
 
